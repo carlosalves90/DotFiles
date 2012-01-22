@@ -51,6 +51,7 @@ set mat=2 "How many tenths of a second to blink
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable "Enable syntax hl
+syntax sync minlines=200
 
 set background=dark
 colorscheme solarized
