@@ -1,0 +1,104 @@
+# Basado en Conky Wizard de Jose David Abad Garci­a
+
+# Default Fonts
+use_xft yes
+xftfont DejaVuSans:size=8
+override_utf8_locale yes
+
+# Performance Settings
+update_interval 1
+total_run_times 0
+double_buffer yes
+no_buffers yes
+net_avg_samples 2
+text_buffer_size 1024
+
+# Window Settings
+own_window yes
+own_window_transparent yes
+own_window_type override
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# Window border
+draw_borders no
+draw_shades no
+
+# Default Color
+default_color E0DFDE
+
+# Color Title.
+color0 DD3A21
+
+# Size and position
+minimum_size 245 735
+gap_x 15
+gap_y 24
+alignment top_right
+
+short_units
+if_up_strictness link
+
+TEXT
+${GOTO 115}${color red}${font OpenLogos:size=50}J${font}${color}
+${alignc}    Debian GNU/Linux
+${GOTO 36}$hr
+${GOTO 36}Host:${GOTO 100}${nodename}   ($machine)
+${GOTO 36}Kernel:${GOTO 100}${kernel}
+${GOTO 36}Battery:${GOTO 100}${execi 60 acpi -b |awk '{print $5}'} ${battery_bar 10,70 BAT1} ${battery_percent BAT1}%
+${GOTO 36}Uptime ${GOTO 100}${uptime}
+${GOTO 36}$hr
+# Processors
+${GOTO 36}${font DejaVuSans:bold:size=9}${color0}CPU${font}${color}${GOTO 150}${running_processes}/${processes} Procs
+${GOTO 36}CPU 0: ${GOTO 80} ${cpu cpu1}%  ${GOTO 160}${freq_g 1} GHz
+${GOTO 60}${cpugraph cpu1 10,170 104E8B ff0000 -t}
+${GOTO 36}CPU 1: ${GOTO 80} ${cpu cpu2}%  ${GOTO 160}${freq_g 2} GHz
+${GOTO 60}${cpugraph cpu2 10,170 104E8B ff0000 -t}
+${GOTO 36}CPU 2: ${GOTO 80} ${cpu cpu3}%  ${GOTO 160}${freq_g 3} GHz
+${GOTO 60}${cpugraph cpu3 10,170 104E8B ff0000 -t}
+${GOTO 36}CPU 3: ${GOTO 80} ${cpu cpu4}%  ${GOTO 160}${freq_g 4} GHz
+${GOTO 60}${cpugraph cpu4 10,170 104E8B ff0000 -t}
+# Memory and Swap
+${GOTO 36}$hr
+${GOTO 36}${font DejaVuSans:bold:size=9}${color0}Memory${font}${color}
+${GOTO 36}RAM: ${GOTO 120}$mem / $memmax
+${GOTO 60}${membar 10,140} ${memperc}%
+${GOTO 36}SWAP:${GOTO 120}${swapbar 10,80} ${swapperc}%
+${GOTO 36}$hr
+${GOTO 36}${font DejaVuSans:bold:size=9}${color0}Disks${font}${color}
+#${GOTO 36}I/O read:${GOTO 90}${diskiograph_read 15,150 008e00 ffb200 -t}
+#${GOTO 36}${voffset -20}${diskio_read}
+#${GOTO 36}I/O write:${GOTO 90}${diskiograph_write 15,150 008e00 ffb200 -t}
+#${GOTO 36}${voffset -20}${diskio_write}
+# Disks space
+${GOTO 36}root (/):${GOTO 120}${fs_used /} / ${fs_size /}
+${GOTO 36}${GOTO 60}${fs_bar 10,140 /} ${fs_used_perc /}%
+${GOTO 36}home (/home):${GOTO 120}${fs_used /home} / ${fs_size /home}
+${GOTO 36}${GOTO 60}${fs_bar 10,140 /home} ${fs_used_perc /home}%
+${GOTO 36}$hr
+# Network graphs
+# Eth0
+${GOTO 36}${font DejaVuSans:bold:size=9}${color0}Network${font}${color}${if_gw}${GOTO 130}GW: ${gw_ip}${endif}
+${if_up eth0}${GOTO 36}eth0:${GOTO 120}${addr eth0}
+${GOTO 36}Up (${upspeedf eth0}):${GOTO 120}${upspeedgraph eth0 12,110 330099 cc0099 -t}
+${GOTO 36}Down (${downspeedf eth0}):${GOTO 120}${downspeedgraph eth0 12,110 330099 cc0099 -t}${endif}
+# Wlan0
+${if_up wlan0}${GOTO 36}wlan0:${GOTO 120}${addr wlan0}
+${GOTO 60}${wireless_essid wlan0}   ${wireless_bitrate wlan0}
+${GOTO 60}${wireless_link_bar 10,140 wlan0} ${wireless_link_qual_perc wlan0}%
+${GOTO 36}Up (${upspeedf wlan0}):${GOTO 120}${upspeedgraph wlan0 12,110 330099 cc0099 -t}
+${GOTO 36}Down (${downspeedf wlan0}):${GOTO 120}${downspeedgraph wlan0 12,110 330099 cc0099 -t}${endif}
+# Ppp0
+${if_up ppp0}${GOTO 36}ppp0:${GOTO 120}${addr ppp0}
+${GOTO 36}Up (${upspeedf ppp0}):${GOTO 120}${upspeedgraph ppp0 12,110 330099 cc0099 -t}
+${GOTO 36}Down (${downspeedf ppp0}):${GOTO 120}${downspeedgraph ppp0 12,110 330099 cc0099 -t}
+${GOTO 36}Total Up: ${totalup ppp0}  Total Down: ${totaldown ppp0}${endif}
+${GOTO 36}Public IP: ${GOTO 120}${execi 1 ~/.scripts/ip.sh}
+${GOTO 36}$hr
+# Connections
+${GOTO 36}${font DejaVuSans:bold:size=9}${color0}Connections${font}${color}
+${GOTO 36}sshd: ${tcp_portmon 22 22 count}${GOTO 120}portmap: ${tcp_portmon 111 111 count}
+${GOTO 36}$hr
+${GOTO 80}${font DejaVuSans:bold:size=9}${color0}Temperatures${font}${color}
+#${GOTO 80}Core1:${GOTO 150}${hwmon 1 temp 1} ºC
+#${GOTO 80}Core2:${GOTO 150}${hwmon 2 temp 1} ºC
+${GOTO 80}Hard disk:${GOTO 150}${hddtemp /dev/sda} ºC
