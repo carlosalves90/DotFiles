@@ -46,6 +46,7 @@ set magic "Set magic on, for regular expressions
 
 set showmatch "Show matching bracets when text indicator is over them
 set mat=2 "How many tenths of a second to blink
+set ruler
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
