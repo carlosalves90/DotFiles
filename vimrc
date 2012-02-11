@@ -88,7 +88,7 @@ set wrap "Wrap lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MISC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+set nocompatible
 "Sets .ael files with the asterisk.vim syntax
 au BufNewFile,BufRead *.ael set filetype=asterisk
 au BufNewFile,BufRead *.log set filetype=messages
