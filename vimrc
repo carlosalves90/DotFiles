@@ -73,6 +73,7 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set modeline "Enable special settings using modeline at bottom
 set expandtab
 set shiftwidth=4
 set tabstop=4
