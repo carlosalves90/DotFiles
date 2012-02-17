@@ -75,16 +75,16 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set modeline "Enable special settings using modeline at bottom
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=4 "the number of columns is moved sideways (<< and >>)
+set tabstop=4 "the number of columns that tab counts
 set smarttab
 
 set lbr
-set tw=500
 
 set ai "Auto indent
 set si "Smart indet
 set wrap "Wrap lines
+set tw=500 "wrap width
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MISC
