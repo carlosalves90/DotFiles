@@ -90,7 +90,7 @@ set tw=500 "wrap width
 " => MISC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
-"Sets .ael files with the asterisk.vim syntax
+"Sets some filetypes
 au BufNewFile,BufRead *.ael set filetype=asterisk
 au BufNewFile,BufRead *.log set filetype=messages
 
