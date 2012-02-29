@@ -84,7 +84,7 @@ set lbr
 set ai "Auto indent
 set si "Smart indet
 set wrap "Wrap lines
-set tw=500 "wrap width
+set tw=80 "wrap width
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MISC
