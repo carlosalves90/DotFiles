@@ -52,7 +52,7 @@ set laststatus=2
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable "Enable syntax hl
-syntax sync minlines=200
+syntax sync minlines=200 "Faster hl with big files
 
 set background=dark
 colorscheme solarized
