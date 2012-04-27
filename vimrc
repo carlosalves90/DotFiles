@@ -77,9 +77,9 @@ set modeline "Enable special settings using modeline at bottom
 set expandtab
 set shiftwidth=4 "the number of columns is moved sideways (<< and >>)
 set tabstop=4 "the number of columns that tab counts
-set smarttab
+"set smarttab
 
-set lbr
+set lbr "linebreaks
 
 set ai "Auto indent
 set si "Smart indet
