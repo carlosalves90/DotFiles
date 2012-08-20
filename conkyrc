@@ -101,4 +101,4 @@ ${GOTO 36}$hr
 ${GOTO 80}${font DejaVuSans:bold:size=9}${color0}Temperatures${font}${color}
 #${GOTO 80}Core1:${GOTO 150}${hwmon 1 temp 1} ºC
 #${GOTO 80}Core2:${GOTO 150}${hwmon 2 temp 1} ºC
-${GOTO 80}Hard disk:${GOTO 150}${hddtemp /dev/sda} ºC
+#${GOTO 80}Hard disk:${GOTO 150}${hddtemp /dev/sda} ºC
