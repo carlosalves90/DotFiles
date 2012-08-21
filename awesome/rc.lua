@@ -341,7 +341,4 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 os.execute("krunner &")
 os.execute("nitrogen --restore &")
-os.execute("nm-applet &")
-os.execute("gnome-power-manager &")
---os.execute("guidance-power-manager &")
 --os.execute("xcompmgr -c &")
