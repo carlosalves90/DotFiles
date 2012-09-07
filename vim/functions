@@ -27,3 +27,9 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 command! Xml call DoPrettyXML()
+
+function! DoPrettyJson()
+    silent %!python -m json.tool 
+    silent %<
+endfunction
+command! Json call DoPrettyJson()
