@@ -11,7 +11,7 @@ function! DoPrettyXML()
   " XML that may contain multiple top-level elements.
   $put ='<PrettyXML>'
   $put ='</PrettyXML>'
-  silent %!tidy -xml -utf8 -i -
+  silent %!tidy -xml -utf8 -i -q -
   "silent %!xmllint --encode UTF-8 --format -
   " xmllint will insert an <?xml?> header. it's easy enough to delete
   " if you don't want it.
