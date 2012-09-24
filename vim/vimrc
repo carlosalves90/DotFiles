@@ -16,7 +16,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
+"runtime! debian.vim
 
 " Sets how many lines of history VIM has to remember
 set history=700
@@ -60,6 +60,8 @@ set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
 set t_Co=256
+au BufNewFile,BufRead *.py colorscheme pychimp
+au BufNewFile,BufRead *.xml colorscheme mustang
 
 set encoding=utf8
 set ffs=unix,dos,mac "Default file types
@@ -86,16 +88,23 @@ set lbr "linebreaks
 set ai "Auto indent
 set si "Smart indet
 set wrap "Wrap lines
-set tw=80 "wrap width
+set tw=79 "wrap width
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MISC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
 "Sets some filetypes
 au BufNewFile,BufRead *.ael set filetype=asterisk
 au BufNewFile,BufRead *.log set filetype=messages
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <F5> :GundoToggle<CR>
+nnoremap <silent> <F9> :TagbarToggle<CR>
+"autocmd VimEnter * nested :call tagbar#autoopen(1)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Statusline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -107,6 +116,9 @@ set statusline+=%h      "help file flag
 set statusline+=%m      "modified flag
 set statusline+=%r      "read only flag
 set statusline+=%y      "filetype
+set statusline+=%{fugitive#statusline()} "git current branch
+set statusline+=%#warninmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
