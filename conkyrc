@@ -7,6 +7,7 @@ override_utf8_locale yes
 
 # Performance Settings
 update_interval 1
+update_interval_on_battery 15
 total_run_times 0
 double_buffer yes
 no_buffers yes
@@ -42,13 +43,16 @@ TEXT
 ${GOTO 115}${color red}${font OpenLogos:size=50}J${font}${color}
 ${alignc}    Debian GNU/Linux
 ${GOTO 36}$hr
-${GOTO 36}Host:${GOTO 100}${nodename}   ($machine)
+${GOTO 36}Host:${GOTO 100}${nodename}  ($machine)
 ${GOTO 36}Kernel:${GOTO 100}${kernel}
+${if_match ${battery_percent BAT1} <= 20} ${if_match "${exec acpi -a |awk '{print $3}'}" == "off-line"}
+${execi 60 notify-send -u critical "Low Battery"} ${endif}${endif}
 ${GOTO 36}Battery:${GOTO 100}${execi 60 acpi -b |awk '{print $5}'} ${battery_bar 10,70 BAT1} ${battery_percent BAT1}%
 ${GOTO 36}Uptime ${GOTO 100}${uptime}
 ${GOTO 36}$hr
 # Processors
-${GOTO 36}${font DejaVuSans:bold:size=9}${color0}CPU${font}${color}${GOTO 150}${running_processes}/${processes} Procs
+${GOTO 36}${font DejaVuSans:bold:size=9}${color0}CPU${font}${color}${GOTO 80}Procs ${running_processes}/${processes}${GOTO 160}Load:${loadavg 2} 
+
 ${GOTO 36}CPU 0: ${GOTO 80} ${cpu cpu1}%  ${GOTO 160}${freq_g 1} GHz
 ${GOTO 60}${cpugraph cpu1 10,170 104E8B ff0000 -t}
 ${GOTO 36}CPU 1: ${GOTO 80} ${cpu cpu2}%  ${GOTO 160}${freq_g 2} GHz
@@ -72,8 +76,8 @@ ${GOTO 36}${font DejaVuSans:bold:size=9}${color0}Disks${font}${color}
 # Disks space
 ${GOTO 36}root (/):${GOTO 120}${fs_used /} / ${fs_size /}
 ${GOTO 36}${GOTO 60}${fs_bar 10,140 /} ${fs_used_perc /}%
-${GOTO 36}home (/home):${GOTO 120}${fs_used /home} / ${fs_size /home}
-${GOTO 36}${GOTO 60}${fs_bar 10,140 /home} ${fs_used_perc /home}%
+${GOTO 36}home (/home):${GOTO 120}${fs_used /home/carlos} / ${fs_size /home/carlos}
+${GOTO 36}${GOTO 60}${fs_bar 10,140 /home/carlos} ${fs_used_perc /home/carlos}%
 ${GOTO 36}$hr
 # Network graphs
 # Eth0
@@ -81,6 +85,11 @@ ${GOTO 36}${font DejaVuSans:bold:size=9}${color0}Network${font}${color}${if_gw}$
 ${if_up eth0}${GOTO 36}eth0:${GOTO 120}${addr eth0}
 ${GOTO 36}Up (${upspeedf eth0}):${GOTO 120}${upspeedgraph eth0 12,110 330099 cc0099 -t}
 ${GOTO 36}Down (${downspeedf eth0}):${GOTO 120}${downspeedgraph eth0 12,110 330099 cc0099 -t}${endif}
+# Br0
+${GOTO 36}${font DejaVuSans:bold:size=9}${color0}Network${font}${color}${if_gw}${GOTO 130}GW: ${gw_ip}${endif}
+${if_up br0}${GOTO 36}br0:${GOTO 120}${addr br0}
+${GOTO 36}Up (${upspeedf br0}):${GOTO 120}${upspeedgraph br0 12,110 330099 cc0099 -t}
+${GOTO 36}Down (${downspeedf br0}):${GOTO 120}${downspeedgraph br0 12,110 330099 cc0099 -t}${endif}
 # Wlan0
 ${if_up wlan0}${GOTO 36}wlan0:${GOTO 120}${addr wlan0}
 ${GOTO 60}${wireless_essid wlan0}   ${wireless_bitrate wlan0}
@@ -92,13 +101,14 @@ ${if_up ppp0}${GOTO 36}ppp0:${GOTO 120}${addr ppp0}
 ${GOTO 36}Up (${upspeedf ppp0}):${GOTO 120}${upspeedgraph ppp0 12,110 330099 cc0099 -t}
 ${GOTO 36}Down (${downspeedf ppp0}):${GOTO 120}${downspeedgraph ppp0 12,110 330099 cc0099 -t}
 ${GOTO 36}Total Up: ${totalup ppp0}  Total Down: ${totaldown ppp0}${endif}
-${GOTO 36}Public IP: ${GOTO 120}${execi 1 ~/.scripts/ip.sh}
+${GOTO 36}Public IP: ${GOTO 120}${execi 60 ~/.scripts/ip.sh}
 ${GOTO 36}$hr
 # Connections
-${GOTO 36}${font DejaVuSans:bold:size=9}${color0}Connections${font}${color}
-${GOTO 36}sshd: ${tcp_portmon 22 22 count}${GOTO 120}portmap: ${tcp_portmon 111 111 count}
-${GOTO 36}$hr
-${GOTO 80}${font DejaVuSans:bold:size=9}${color0}Temperatures${font}${color}
+#${GOTO 36}${font DejaVuSans:bold:size=9}${color0}Connections${font}${color}
+#${GOTO 36}sshd: ${tcp_portmon 22 22 count}${GOTO 120}portmap: ${tcp_portmon 111 111 count}
+#${GOTO 36}tor: ${tcp_portmon 9001 9001 count} ${GOTO 120}torrent: ${tcp_portmon 6881 6999 count}
+#${GOTO 36}$hr
+#${GOTO 80}${font DejaVuSans:bold:size=9}${color0}Temperatures${font}${color}
 #${GOTO 80}Core1:${GOTO 150}${hwmon 1 temp 1} ºC
-#${GOTO 80}Core2:${GOTO 150}${hwmon 2 temp 1} ºC
+#${GOTO 80}Core2:${GOTO 150}${hwmon 1 temp 2} ºC
 #${GOTO 80}Hard disk:${GOTO 150}${hddtemp /dev/sda} ºC
